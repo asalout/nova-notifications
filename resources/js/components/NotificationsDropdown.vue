@@ -91,7 +91,7 @@
                 self.loadNotifications()
 
                 let level = 'info'
-                const levels = ['success', 'info', 'error']
+                const levels = ['success', 'info', 'error', 'providerUpdated', 'orderUpdated']
 
                 if (levels.indexOf(notification.level) !== -1) {
                     level = notification.level
@@ -125,6 +125,7 @@
                 const showToast = !!(notification.display_toasted || Nova.config.toasted_enabled)
 
                 if (showToast) {
+                    console.log(level)
                   self.$toasted.show(notification.title, {
                     type: level,
                     keepOnHover: true,

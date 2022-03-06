@@ -8,7 +8,7 @@ use Mirovit\NovaNotifications\Contracts\Notification as NotificationContract;
 
 class Notification implements NotificationContract, Arrayable
 {
-    const LEVELS = ['info', 'success', 'error'];
+    const LEVELS = ['info', 'success', 'error', 'providerUpdated', 'orderUpdated'];
 
     protected $notification = [];
 
@@ -119,6 +119,20 @@ class Notification implements NotificationContract, Arrayable
             ->level('error');
     }
 
+    public function providerUpdated(string $value): Notification
+    {
+        return $this
+            ->title($value)
+            ->level('providerUpdated');
+    }
+
+    public function orderUpdated(string $value): Notification
+    {
+        return $this
+            ->title($value)
+            ->level('orderUpdated');
+    }
+
     public function createdAt(Carbon $value): Notification
     {
         $this->notification['created_at'] = $value->toAtomString();
@@ -148,7 +162,7 @@ class Notification implements NotificationContract, Arrayable
         $this->notification['sound'] = $value;
         return $this;
     }
-    
+
     public function playSound(bool $value = true): Notification
     {
         $this->notification['play_sound'] = $value;
